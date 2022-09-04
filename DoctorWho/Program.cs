@@ -80,10 +80,7 @@ public class Program
                               + $"{episode.DoctorName}\n-----------");
         }
     }
-
-
     public static void Main()
     {
-        SummariseEpisodes();
     }
 }
