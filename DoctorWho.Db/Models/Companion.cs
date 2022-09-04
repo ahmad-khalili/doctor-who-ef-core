@@ -6,12 +6,12 @@ public class Companion
 {
     public Companion()
     {
-        Episodes = new List<Episode>();
+        EpisodeCompanions = new List<EpisodeCompanion>();
     }
     
     public int CompanionId { get; set; }
     public string CompanionName { get; set; }
     public string WhoPlayed { get; set; }
 
-    public List<Episode> Episodes { get; set; }
+    public List<EpisodeCompanion> EpisodeCompanions { get; set; }
 }

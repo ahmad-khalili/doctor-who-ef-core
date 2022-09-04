@@ -6,8 +6,8 @@ public class Episode
 {
     public Episode()
     {
-        Enemies = new List<Enemy>();
-        Companions = new List<Companion>();
+        EpisodeEnemies = new List<EpisodeEnemy>();
+        EpisodeCompanions = new List<EpisodeCompanion>();
     }
     
     public int EpisodeId { get; set; }
@@ -25,7 +25,7 @@ public class Episode
 
     public string Notes { get; set; }
 
-    public List<Enemy> Enemies { get; set; }
+    public List<EpisodeEnemy> EpisodeEnemies { get; set; }
 
-    public List<Companion> Companions { get; set; }
+    public List<EpisodeCompanion> EpisodeCompanions { get; set; }
 }
