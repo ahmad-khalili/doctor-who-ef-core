@@ -52,4 +52,9 @@ public class DoctorRepository
         _context.Doctors.Remove(doctor);
         _context.SaveChanges();
     }
+
+    public ICollection<Doctor> GetAll()
+    {
+        return _context.Doctors.ToList();
+    }
 }
