@@ -12,6 +12,14 @@ public class CompanionRepository
         _context = new DoctorWhoCoreDbContext();
     }
     
+    public Companion GetCompanionById(int companionId)
+    {
+        var companion = _context.Companions.FirstOrDefault(c => c.CompanionId == companionId);
+        if (companion == default)
+            throw new Exception($"Companion with Id({companionId}) was not found!");
+        return companion;
+    }
+    
     public void AddCompanion(Companion companion)
     {
         _context.Companions.Add(companion);
