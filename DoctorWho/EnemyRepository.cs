@@ -11,6 +11,14 @@ public class EnemyRepository
     {
         _context = new DoctorWhoCoreDbContext();
     }
+
+    public Enemy GetEnemyById(int enemyId)
+    {
+        var enemy = _context.Enemies.FirstOrDefault(e => e.EnemyId == enemyId);
+        if (enemy == default)
+            throw new Exception($"Enemy with Id({enemyId}) was not found!");
+        return enemy;
+    }
     
     public void AddEnemy(Enemy enemy)
     {
