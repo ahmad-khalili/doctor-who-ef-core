@@ -77,7 +77,7 @@ public class EpisodeRepository
         _context.SaveChanges();
     }
     
-    public static void SummariseEpisodes()
+    public void SummariseEpisodes()
     {
         using var context = new DoctorWhoCoreDbContext();
         context.Database.OpenConnection();
@@ -124,7 +124,7 @@ public class EpisodeRepository
         }
     }
     
-    public static void ListAllEpisodes()
+    public void ListAllEpisodes()
     {
         using var context = new DoctorWhoCoreDbContext();
         var episodesWithInfo = context.EpisodesWithInfo

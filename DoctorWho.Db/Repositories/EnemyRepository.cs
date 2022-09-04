@@ -43,7 +43,7 @@ public class EnemyRepository
         _context.SaveChanges();
     }
     
-    public static string? GetEnemiesForEpisode(int episodeId)
+    public string? GetEnemiesForEpisode(int episodeId)
     {
         using var context = new DoctorWhoCoreDbContext();
         var companions = context.Episodes.Select(e => context.GetEnemies(episodeId)).FirstOrDefault();

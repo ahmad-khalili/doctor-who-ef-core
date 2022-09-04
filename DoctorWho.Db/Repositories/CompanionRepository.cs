@@ -43,7 +43,7 @@ public class CompanionRepository
         _context.SaveChanges();
     }
     
-    public static string? PrintCompanionsForEpisode(int episodeId)
+    public string? PrintCompanionsForEpisode(int episodeId)
     {
         using var context = new DoctorWhoCoreDbContext();
         var companions = context.Episodes.Select(e => context.GetCompanions(episodeId)).FirstOrDefault();
