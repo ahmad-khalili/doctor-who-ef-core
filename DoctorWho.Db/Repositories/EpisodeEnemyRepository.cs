@@ -1,8 +1,6 @@
-﻿using DoctorWho.Db;
-using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.Models;
 
-namespace DoctorWho;
-
+namespace DoctorWho.Db.Repositories;
 public class EpisodeEnemyRepository
 {
     private readonly DoctorWhoCoreDbContext _context;

@@ -1,7 +1,6 @@
-﻿using DoctorWho.Db;
-using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.Models;
 
-namespace DoctorWho;
+namespace DoctorWho.Db.Repositories;
 
 public class CompanionRepository
 {
@@ -42,5 +41,12 @@ public class CompanionRepository
     {
         _context.Companions.Remove(companion);
         _context.SaveChanges();
+    }
+    
+    public static string? PrintCompanionsForEpisode(int episodeId)
+    {
+        using var context = new DoctorWhoCoreDbContext();
+        var companions = context.Episodes.Select(e => context.GetCompanions(episodeId)).FirstOrDefault();
+        return companions;
     }
 }
