@@ -12,6 +12,12 @@ public class DoctorWhoCoreDbContext : DbContext
     public DbSet<Episode> Episodes { get; set; }
     public DbSet<EpisodeEnemy> EpisodeEnemies { get; set; }
     public DbSet<EpisodeCompanion> EpisodeCompanions { get; set; }
+    public DbSet<EpisodeWithInfo> EpisodesWithInfo { get; set; }
+    public DbSet<EpisodeSummaryCompanion> EpisodeSummariesCompanions { get; set; }
+    public DbSet<EpisodeSummaryEnemy> EpisodeSummariesEnemies { get; set; }
+
+    public string GetCompanions(int episodeId) => throw new NotSupportedException();
+    public string GetEnemies(int episodeId) => throw new NotSupportedException();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -106,5 +112,13 @@ public class DoctorWhoCoreDbContext : DbContext
             new EpisodeEnemy { EpisodeEnemyId = 4, EpisodeId = 4, EnemyId = 1},
             new EpisodeEnemy { EpisodeEnemyId = 5, EpisodeId = 5, EnemyId = 5}
         );
+
+        modelBuilder.HasDbFunction(typeof(DoctorWhoCoreDbContext)
+                .GetMethod(nameof(GetCompanions), new[] { typeof(int) }))
+            .HasName("fnCompanions");
+        
+        modelBuilder.HasDbFunction(typeof(DoctorWhoCoreDbContext)
+                .GetMethod(nameof(GetEnemies), new[] { typeof(int) }))
+            .HasName("fnEnemies");
     }
 }
