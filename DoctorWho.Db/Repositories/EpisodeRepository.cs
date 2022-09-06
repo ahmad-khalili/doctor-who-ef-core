@@ -71,9 +71,14 @@ public class EpisodeRepository
         _context.SaveChanges();
     }
 
-    public void DeleteEpisode(Episode episode)
+    public void DeleteEpisode(int episodeId)
     {
-        _context.Episodes.Remove(episode);
+        var episodeToDelete = _context.Episodes.FirstOrDefault(e => e.EpisodeId.Equals(episodeId));
+
+        if (episodeToDelete == default)
+            throw new Exception($"Episode with id {episodeId} not found!");
+        
+        _context.Episodes.Remove(episodeToDelete);
         _context.SaveChanges();
     }
     
