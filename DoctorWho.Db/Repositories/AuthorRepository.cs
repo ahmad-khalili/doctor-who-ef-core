@@ -1,7 +1,6 @@
-﻿using DoctorWho.Db;
-using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.Models;
 
-namespace DoctorWho;
+namespace DoctorWho.Db.Repositories;
 
 public class AuthorRepository
 {
@@ -24,9 +23,14 @@ public class AuthorRepository
         _context.SaveChanges();
     }
 
-    public void DeleteAuthor(Author author)
+    public void DeleteAuthor(int authorId)
     {
-        _context.Authors.Remove(author);
+        var authorToDelete = _context.Authors.FirstOrDefault(a => a.AuthorId.Equals(authorId));
+
+        if (authorToDelete == default)
+            throw new Exception($"Author with id {authorId} not found!");
+        
+        _context.Authors.Remove(authorToDelete);
         _context.SaveChanges();
     }
 }

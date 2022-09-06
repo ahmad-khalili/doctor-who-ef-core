@@ -1,7 +1,6 @@
-﻿using DoctorWho.Db;
-using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.Models;
 
-namespace DoctorWho;
+namespace DoctorWho.Db.Repositories;
 
 public class DoctorRepository
 {
@@ -47,9 +46,14 @@ public class DoctorRepository
         _context.SaveChanges();
     }
 
-    public void DeleteDoctor(Doctor doctor)
+    public void DeleteDoctor(int doctorId)
     {
-        _context.Doctors.Remove(doctor);
+        var doctorToDelete = _context.Doctors.FirstOrDefault(d => d.DoctorId.Equals(doctorId));
+
+        if (doctorToDelete == default)
+            throw new Exception($"Doctor with id {doctorId} not found!");
+        
+        _context.Doctors.Remove(doctorToDelete);
         _context.SaveChanges();
     }
 

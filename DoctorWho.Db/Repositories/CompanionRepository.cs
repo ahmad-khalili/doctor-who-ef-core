@@ -1,7 +1,6 @@
-﻿using DoctorWho.Db;
-using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.Models;
 
-namespace DoctorWho;
+namespace DoctorWho.Db.Repositories;
 
 public class CompanionRepository
 {
@@ -38,9 +37,21 @@ public class CompanionRepository
         _context.SaveChanges();
     }
 
-    public void DeleteCompanion(Companion companion)
+    public void DeleteCompanion(int companionId)
     {
-        _context.Companions.Remove(companion);
+        var companionToDelete = _context.Companions.FirstOrDefault(c => c.CompanionId.Equals(companionId));
+
+        if (companionToDelete == default)
+            throw new Exception($"Companion with id {companionId} not found!");
+        
+        _context.Companions.Remove(companionToDelete);
         _context.SaveChanges();
+    }
+    
+    public string? PrintCompanionsForEpisode(int episodeId)
+    {
+        using var context = new DoctorWhoCoreDbContext();
+        var companions = context.Episodes.Select(e => context.GetCompanions(episodeId)).FirstOrDefault();
+        return companions;
     }
 }

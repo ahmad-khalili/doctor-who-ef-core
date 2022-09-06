@@ -1,7 +1,6 @@
-﻿using DoctorWho.Db;
-using DoctorWho.Db.Models;
+﻿using DoctorWho.Db.Models;
 
-namespace DoctorWho;
+namespace DoctorWho.Db.Repositories;
 
 public class EnemyRepository
 {
@@ -38,9 +37,21 @@ public class EnemyRepository
         _context.SaveChanges();
     }
 
-    public void DeleteEnemy(Enemy enemy)
+    public void DeleteEnemy(int enemyId)
     {
-        _context.Enemies.Remove(enemy);
+        var enemyToDelete = _context.Enemies.FirstOrDefault(e => e.EnemyId.Equals(enemyId));
+
+        if (enemyToDelete == default)
+            throw new Exception($"Enemy with id {enemyId} not found!");
+        
+        _context.Enemies.Remove(enemyToDelete);
         _context.SaveChanges();
+    }
+    
+    public string? GetEnemiesForEpisode(int episodeId)
+    {
+        using var context = new DoctorWhoCoreDbContext();
+        var companions = context.Episodes.Select(e => context.GetEnemies(episodeId)).FirstOrDefault();
+        return companions;
     }
 }
